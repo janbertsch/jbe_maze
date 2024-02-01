@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Game : MonoBehaviour
     public Transform Goal;
 
     public CinemachineVirtualCamera virtualCamera;
+
+    public int currentLevel = 1;
+    public TMPro.TextMeshProUGUI LevelCounter;
 
     void Start()
     {
@@ -82,6 +86,8 @@ public class Game : MonoBehaviour
         Player.position = Vector3.Lerp(Player.position, new Vector3(x, y), Time.deltaTime * 12);
         if (Vector3.Distance(Player.position, Goal.position) < 0.12f)
         {
+            currentLevel++;
+            LevelCounter.text = currentLevel.ToString();
             if (Random.Range(0, 5) < 3) w++;
             else h++;
             GenerateMaze();
